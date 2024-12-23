@@ -13,6 +13,12 @@
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
+    <scm>
+        <connection>scm:git:git://github.com/ndkhanh-axonivy/playing-with-maven.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:ndkhanh-axonivy/playing-with-maven.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
