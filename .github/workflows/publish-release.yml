@@ -1,0 +1,17 @@
+name: Tag Trigger Workflow
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  tag-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print Tag Info
+        run: echo "A new version tag has been pushed: ${{ github.ref_name }}"
