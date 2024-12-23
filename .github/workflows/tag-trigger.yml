@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print Tag Info
-        run: echo "A new version tag has been pushed: ${{ github.ref_name }}"
+        run: echo "A new version tag has been pushed: ${GITHUB_REF#refs/tags/}"
