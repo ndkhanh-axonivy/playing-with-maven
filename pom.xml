@@ -15,7 +15,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/ndkhanh-axonivy/playing-with-maven.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:ndkhanh-axonivy/playing-with-maven.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/ndkhanh-axonivy/playing-with-maven.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
