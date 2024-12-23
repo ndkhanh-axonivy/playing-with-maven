@@ -34,7 +34,7 @@ jobs:
 
     - name: Build with Maven
       env:
-        GITHUB_TOKEN: ${{ secrets.MY_PAT }}
+        GITHUB_TOKEN: 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
       run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
 
     - name: Create pull request
