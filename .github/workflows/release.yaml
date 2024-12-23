@@ -1,4 +1,4 @@
-name: Reusable Release-Build
+name: Release-Build
 
 on: 
   workflow_dispatch:
