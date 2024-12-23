@@ -1,0 +1,47 @@
+name: Reusable Release-Build
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v8
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: 21
+        distribution: temurin
+        server-id: github
+
+    - name: Setup Maven
+      uses: stCarolas/setup-maven@v5
+      with:
+        maven-version: 3.9.8
+
+    - name: Configure Git
+      run: |
+        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        git config user.name "${{ github.actor }}"
+        git checkout -b new-release
+
+    - name: Build with Maven
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
+
+    - name: Create pull request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: ${{ steps.branch-name.outputs.current_branch }}
+        source_branch: new-release
+        pr_title: "Release"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        pr_assignee: ${{ github.actor }}
