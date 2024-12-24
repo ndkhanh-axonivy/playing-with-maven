@@ -10,8 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Echo Secret
-      run: echo "The secret is ${{ secrets.MY_PAT }}"
+    - name: Validate Secret
+      run: |
+        if [ -z "${{ secrets.MY_SECRET }}" ]; then
+          echo "Secret is not set."
+          exit 1
+        else
+          echo "Secret is set."
+        fi
 
     - name: Get branch name
       id: branch-name
