@@ -24,5 +24,5 @@ jobs:
       env:
         PAT: ${{ secrets.MY_SECRET }}
       run: |
-        git tag ${{ env.tag }}
-        git push https://${PAT}@github.com/<owner>/<repo>.git ${{ env.tag }}
+        git tag ${{ steps.create_tag.outputs.tag }}
+        git push https://${PAT}@github.com/<owner>/<repo>.git ${{ steps.create_tag.outputs.tag }}
