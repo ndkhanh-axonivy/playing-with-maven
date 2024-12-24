@@ -25,4 +25,4 @@ jobs:
         PAT: ${{ secrets.MY_SECRET }}
       run: |
         git tag ${{ steps.create_tag.outputs.tag }}
-        git push https://${PAT}@github.com/<owner>/<repo>.git ${{ steps.create_tag.outputs.tag }}
+        git push https://${PAT}@github.com/ndkhanh-axonivy/playing-with-maven.git ${{ steps.create_tag.outputs.tag }}
