@@ -1,10 +1,9 @@
 name: Tag Trigger Workflow
 
 on:
-  workflow_run:
-    workflows: ["Release-Build"]
-    types:
-      - completed
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   tag-job:
