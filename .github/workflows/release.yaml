@@ -10,6 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Echo Secret
+      run: echo "The secret is: ${{ secrets.MY_PAT }}"
+
     - name: Get branch name
       id: branch-name
       uses: tj-actions/branch-names@v8
@@ -33,7 +36,9 @@ jobs:
         git checkout -b new-release
 
     - name: Build with Maven
-      run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://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@maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
 
     - name: Create pull request
       uses: repo-sync/pull-request@v2
