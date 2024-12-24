@@ -6,11 +6,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    with:
-      token: ${{ secrets.MY_SECRET }}
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.MY_SECRET }}
 
     - name: Validate Secret
       run: |
