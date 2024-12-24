@@ -52,5 +52,5 @@ jobs:
         destination_branch: ${{ steps.branch-name.outputs.current_branch }}
         source_branch: new-release
         pr_title: "Release"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.MY_SECRET }}
         pr_assignee: ${{ github.actor }}
