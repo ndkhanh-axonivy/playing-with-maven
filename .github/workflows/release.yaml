@@ -44,8 +44,6 @@ jobs:
         git checkout -b new-release-
 
     - name: Build with Maven
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_SECRET }}
       run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
 
     - name: Create pull request
@@ -54,5 +52,4 @@ jobs:
         destination_branch: ${{ steps.branch-name.outputs.current_branch }}
         source_branch: new-release
         pr_title: "Release"
-        github_token: ${{ secrets.MY_SECRET }}
         pr_assignee: ${{ github.actor }}
