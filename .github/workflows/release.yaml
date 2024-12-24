@@ -44,6 +44,8 @@ jobs:
         git checkout -b new-release-
 
     - name: Build with Maven
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_SECRET }}
       run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
 
     - name: Create pull request
