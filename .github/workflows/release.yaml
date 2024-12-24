@@ -41,10 +41,21 @@ jobs:
         git config user.name "${{ github.actor }}"
         git checkout -b new-release
 
-    - name: Build with Maven
+    - name: Prepare Release
       env:
         GITHUB_TOKEN: ${{ secrets.MY_SECRET }}
-      run: mvn --batch-mode -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:prepare release:perform
+      run: mvn --batch-mode release:prepare
+
+    - name: Push Release Commit
+      run: git push origin HEAD
+
+    - name: Push Release Tag
+      run: git push --tags
+
+    - name: Perform Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_SECRET }}
+      run: mvn -Darguments="-Dmaven.test.skip=true -DaltDeploymentRepository=github::https://maven.pkg.github.com/ndkhanh-axonivy/playing-with-maven" release:perform
 
     - name: Create pull request
       uses: repo-sync/pull-request@v2
