@@ -6,8 +6,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.MY_SECRET }}
 
     - name: Set up Git
       run: |
@@ -21,8 +25,6 @@ jobs:
         echo "::set-output name=tag::$TAG_NAME"
 
     - name: Push tag to repository
-      env:
-        PAT: ${{ secrets.MY_SECRET }}
       run: |
         git tag ${{ steps.create_tag.outputs.tag }}
-        git push https://${PAT}@github.com/ndkhanh-axonivy/playing-with-maven.git ${{ steps.create_tag.outputs.tag }}
+        git push origin ${{ steps.create_tag.outputs.tag }}
